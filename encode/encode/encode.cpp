@@ -59,19 +59,18 @@ int main(int argc, char *argv[]) {
 	}
 
 	// loading "EOF" into byte(s)
-	for (unsigned int i = 0; i < huffT.at(0).length(); i++) {
+	for (unsigned int i = 0; i < huffT.at(EOF).length(); i++) {
 		if (bitCount == -1) {
 			std::cout << static_cast<char>(bits8.to_ulong());
 			bitCount = 7;
 			bits8.reset();
 		}
-		bits8[bitCount] = huffT.at(0).at(i) -48 ;		// - 48 is to convert char to int
+		bits8[bitCount] = huffT.at(EOF).at(i) -48 ;		// - 48 is to convert char to int
 		bitCount--;
 	}
 	// there will be trailing 0's after insertion of "EOF"
 	if(bitCount != 7)
 		std::cout << static_cast<char>(bits8.to_ulong());
-
-
+	
 	system("pause");
 }

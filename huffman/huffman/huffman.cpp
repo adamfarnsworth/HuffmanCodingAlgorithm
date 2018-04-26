@@ -9,7 +9,7 @@ std::ofstream myfile;
 
 struct node {
 	int freq;
-	std::string value;
+	int value;
 
 	node* left;
 	node* right;
@@ -35,7 +35,7 @@ void printValues(node* root, std::string bits) {
 	if (root == NULL)
 		return;
 	printValues(root->left, bits + "0");
-	if (root->value != "") {
+	if (root->value != 0) {
 		myfile << root->value << "\t" << bits << std::endl;
 		fileSize = bits.size()*root->freq;
 	}
@@ -62,14 +62,14 @@ int main() {
 
 	node* nullChar = new node();
 	nullChar->freq = 0;
-	nullChar->value = "0";
+	nullChar->value = EOF;
 	pq.push(nullChar);
 
 	// loading input into min heap
 	while (getline(std::cin, freq) && freq.size() > 0) {
 		node* currentValue = new node();
 		std::size_t pos = tabOrSpace(freq);
-		currentValue->value = freq.substr(0, pos);
+		currentValue->value = stoi(freq.substr(0, pos));
 		currentValue->freq = stoi(freq.substr(pos + 1));
 		pq.push(currentValue);
 	}
