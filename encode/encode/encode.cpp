@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
 		// loading char into byte(s)
 		for (unsigned int i = 0; i < huffT.at(a).length(); i++) {
 			if (bitCount == -1) {
-				std::cout << bits8<< std::endl;
+				std::cout << static_cast<char>(bits8.to_ulong());
 				bitCount = 7;
 			}
 			bits8[bitCount] = huffT.at(a).at(i) - 48;		// - 48 is to convert char to int
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 	// loading "EOF" into byte(s)
 	for (unsigned int i = 0; i < huffT.at(0).length(); i++) {
 		if (bitCount == -1) {
-			std::cout << bits8 << std::endl;
+			std::cout << static_cast<char>(bits8.to_ulong());
 			bitCount = 7;
 			bits8.reset();
 		}
@@ -70,8 +70,8 @@ int main(int argc, char *argv[]) {
 	}
 	// there will be trailing 0's after insertion of "EOF"
 	if(bitCount != 7)
-		std::cout << bits8 << std::endl;
+		std::cout << static_cast<char>(bits8.to_ulong());
 
 
-	//system("pause");
+	system("pause");
 }
