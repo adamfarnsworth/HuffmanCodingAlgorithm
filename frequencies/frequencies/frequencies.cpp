@@ -17,9 +17,6 @@ int main() {
 	//reading input character by character
 	while (std::cin.get(a)) {
 		pq.push(a);
-		//if (a == '\n')
-		//	//if(std::cin.eof())
-		//	break;
 	}
 
 	int current = 0;
