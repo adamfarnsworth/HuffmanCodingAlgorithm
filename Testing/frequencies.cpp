@@ -22,6 +22,7 @@ int main() {
 		//	break;
 	}
 
+
 	int current = 0;
 	int previous = 0;
 	// if statement protects against nothing being entered
@@ -46,5 +47,6 @@ int main() {
 	}
 	std::cout << previous << "\t" << count << std::endl;
 
-	system("pause");
+
+	//system("pause");
 }
