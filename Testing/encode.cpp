@@ -4,9 +4,6 @@
 #include <unordered_map>	// std::unordered_map
 #include <bitset>			// std::bitset
 
-//testing purposes
-std::ofstream encodedFile;
-
 std::ifstream huffmanTable;
 /*
 finds position of \t or ' '
@@ -47,35 +44,23 @@ int main(int argc, char *argv[]) {
 	}
 	huffmanTable.close();
 
-	//tesing purposes
-	encodedFile.open("encoded.txt");
-
 	//reading input character by character
 	// && a != EOF
-
-
 	while (std::cin.get(a)) {
 		// loading char into byte(s)
 		for (unsigned int i = 0; i < huffT.at(a).length(); i++) {
 			if (bitCount == -1) {
-				//tesing purposes
-				encodedFile << static_cast<char>(bits8.to_ulong());
-
 				std::cout << static_cast<char>(bits8.to_ulong());
 				bitCount = 7;
-				bits8.reset();
 			}
 			bits8[bitCount] = huffT.at(a).at(i) - 48;		// - 48 is to convert char to int
 			bitCount--;
 		}
 	}
 
-	// loading "EOF" into byte(s)
+	// loading "NULL" into byte(s)
 	for (unsigned int i = 0; i < huffT.at(32000).length(); i++) {
 		if (bitCount == -1) {
-			//tesing purposes
-			encodedFile << static_cast<char>(bits8.to_ulong());
-
 			std::cout << static_cast<char>(bits8.to_ulong());
 			bitCount = 7;
 			bits8.reset();
@@ -83,15 +68,9 @@ int main(int argc, char *argv[]) {
 		bits8[bitCount] = huffT.at(32000).at(i) -48 ;		// - 48 is to convert char to int
 		bitCount--;
 	}
-	// there will be trailing 0's after insertion of "EOF"
-	if (bitCount != 7) {
-		//tesing purposes
-		encodedFile << static_cast<char>(bits8.to_ulong());
-
+	// there will be trailing 0's after insertion of "NULL"
+	if(bitCount != 7)
 		std::cout << static_cast<char>(bits8.to_ulong());
-	}
 	
-	//tesing purposes
-	encodedFile.close();
-	system("pause");
+	//system("pause");
 }

@@ -9,7 +9,7 @@ std::ofstream myfile;
 
 struct node {
 	int freq;
-	std::string value;
+	int value;
 
 	node* left;
 	node* right;
@@ -35,9 +35,9 @@ void printValues(node* root, std::string bits) {
 	if (root == NULL)
 		return;
 	printValues(root->left, bits + "0");
-	if (root->value != "") {
+	if (root->left == NULL) {
 		myfile << root->value << "\t" << bits << std::endl;
-		fileSize = bits.size()*root->freq;
+		fileSize += bits.size()*root->freq;
 	}
 	printValues(root->right, bits + "1");
 }
@@ -61,15 +61,15 @@ int main() {
 	std::priority_queue<node*, std::vector<node*>, CompareNode> pq;
 
 	node* nullChar = new node();
+	nullChar->value = 32000;
 	nullChar->freq = 0;
-	nullChar->value = "0";
 	pq.push(nullChar);
 
 	// loading input into min heap
 	while (getline(std::cin, freq) && freq.size() > 0) {
 		node* currentValue = new node();
 		std::size_t pos = tabOrSpace(freq);
-		currentValue->value = freq.substr(0, pos);
+		currentValue->value = stoi(freq.substr(0, pos));
 		currentValue->freq = stoi(freq.substr(pos + 1));
 		pq.push(currentValue);
 	}
@@ -90,5 +90,5 @@ int main() {
 	printValues(pq.top(), "");
 	myfile.close();
 	std::cout << "file size = " << fileSize << " bits" << std::endl;
-	system("pause");
+	//system("pause");
 }

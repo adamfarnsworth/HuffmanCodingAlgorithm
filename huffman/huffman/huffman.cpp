@@ -35,9 +35,9 @@ void printValues(node* root, std::string bits) {
 	if (root == NULL)
 		return;
 	printValues(root->left, bits + "0");
-	if (root->value != 0) {
+	if (root->left == NULL) {
 		myfile << root->value << "\t" << bits << std::endl;
-		fileSize = bits.size()*root->freq;
+		fileSize += bits.size()*root->freq;
 	}
 	printValues(root->right, bits + "1");
 }
@@ -61,8 +61,8 @@ int main() {
 	std::priority_queue<node*, std::vector<node*>, CompareNode> pq;
 
 	node* nullChar = new node();
+	nullChar->value = 32000;
 	nullChar->freq = 0;
-	nullChar->value = EOF;
 	pq.push(nullChar);
 
 	// loading input into min heap
